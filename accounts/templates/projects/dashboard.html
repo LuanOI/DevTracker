@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <title>Dashboard | DevTracker</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Dashboard</h1>
+    <p>Olá, <strong>{{ request.user.username }}</strong></p>
+    <div class="nav">
+      <a href="/accounts/profile/">Perfil</a>
+      <a href="/accounts/logout/">Sair</a>
+      <a href="/swagger/">API Docs</a>
+    </div>
+
+    <h2>Seus Times</h2>
+    {% for t in teams %}
+      <div class="card"><strong>{{ t.name }}</strong> <span class="badge">owner</span></div>
+    {% empty %}
+      <p>Nenhum time ainda.</p>
+    {% endfor %}
+
+    <h2>Projetos Recentes</h2>
+    {% for p in projects %}
+      <div class="card">
+        <strong>{{ p.name }}</strong>
+        <div>{{ p.description|default:"sem descrição" }}</div>
+      </div>
+    {% empty %}
+      <p>Nenhum projeto ainda.</p>
+    {% endfor %}
+
+    <h2>Tarefas Recentes</h2>
+    {% for t in tasks %}
+      <div class="card">
+        <strong>{{ t.title }}</strong> — {{ t.project.name }} {% if t.done %}<span class="badge">concluída</span>{% endif %}
+      </div>
+    {% empty %}
+      <p>Nenhuma tarefa ainda.</p>
+    {% endfor %}
+  </div>
+</body>
+</html>

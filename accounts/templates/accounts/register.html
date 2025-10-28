@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro | DevTracker</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class = 'container'>
+        <h1>Criar conta</h1>
+        {% if form.errors %}<p class="error">Verifique os campos.</p>{% endif %}
+        <form method="post">{%csrf_token%}
+            <label>Usuário</label>
+            {{form.username}}
+            <label>Email</label>
+            {{form.email}}
+            <label>Senha</label>
+            {{form.password}}
+            <label>Confirmar senha</label>
+            {{form.password_confirm}}
+            <button type="submit">Registrar</button>
+        </form>
+        <div class="nav">
+            <a href="/accounts/login/">Já tenho conta</a>
+        </div>
+
+    </div>
+</body>
+</html>
